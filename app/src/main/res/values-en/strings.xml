@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Recuperacion</string>
+    <string name="Precio">Price</string>
+    <string name="Disponible">Available</string>
+    <string name="Unidades">Unit/s</string>
+    <string name="Euro">€</string>
+    <string name="Descripcion">Description</string>
+    <string name="Stock">Stock</string>
+    <string name="Producto">Product</string>
+    <string name="PrecioRebajado">Discount Price</string>
+    <string name="Url">Image Url</string>
+    <string name="Confirmar">Confirm</string>
+    <string name="Añadir">ADD PRODUCT</string>
+    <string name="UltimasUni">Last Units</string>
+</resources>

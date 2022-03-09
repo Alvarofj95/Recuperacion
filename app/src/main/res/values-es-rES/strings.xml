@@ -1,9 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Recuperacion</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
-    <string name="Android" translatable="false">Android</string>
-    <string name="Category" translatable="false">Category</string>
     <string name="Precio">Precio</string>
     <string name="Disponible">Disponible</string>
     <string name="Unidades">Ud/s</string>
