@@ -25,7 +25,7 @@
         android:layout_marginStart="40dp"
         android:layout_marginTop="20dp"
         android:text="@string/Android"
-        android:textAppearance="@style/titulo"
+        android:textAppearance="@style/tituloDetail"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/iv_product_detail" />
 
@@ -36,7 +36,7 @@
         android:layout_marginStart="40dp"
         android:layout_marginTop="20dp"
         android:text="@string/Android"
-        android:textAppearance="@style/subtitulo"
+        android:textAppearance="@style/titulo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_name_detail" />
 
@@ -46,7 +46,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:text="@string/Unidades"
-        android:textAppearance="@style/subtitulo"
+        android:textAppearance="@style/titulo"
         app:layout_constraintBottom_toBottomOf="@+id/tv_count_detail"
         app:layout_constraintStart_toEndOf="@+id/tv_count_detail"
         app:layout_constraintTop_toTopOf="@+id/tv_count_detail" />
@@ -58,7 +58,7 @@
         android:layout_marginStart="40dp"
         android:layout_marginTop="20dp"
         android:text="@string/Android"
-        android:textAppearance="@style/subtitulo"
+        android:textAppearance="@style/titulo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_count_detail" />
 
@@ -68,7 +68,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:text="@string/Euro"
-        android:textAppearance="@style/subtitulo"
+        android:textAppearance="@style/titulo"
         app:layout_constraintBottom_toBottomOf="@+id/tv_price_detail"
         app:layout_constraintStart_toEndOf="@+id/tv_price_detail"
         app:layout_constraintTop_toTopOf="@+id/tv_price_detail" />
@@ -119,12 +119,21 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="40dp"
         android:text="@string/Descripcion"
-        android:textAppearance="@style/subtitulo"
+        android:textAppearance="@style/titulo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_price_detail" />
 
-
+    <ImageButton
+        android:id="@+id/ib_noLike_item"
+        android:layout_width="70dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="8dp"
+        android:elevation="2dp"
+        app:layout_constraintEnd_toEndOf="@+id/tv_description_detail"
+        app:layout_constraintTop_toBottomOf="@+id/tv_description_detail"
+        app:srcCompat="@drawable/ic_baseline_restore_from_trash_24"
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
