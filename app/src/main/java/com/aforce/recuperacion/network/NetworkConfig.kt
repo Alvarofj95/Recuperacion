@@ -15,7 +15,7 @@ object NetworkConfig {
         .build();
 
     private val retrofit = Retrofit.Builder()
-        .baseUrl("http://localhost:1111/swagger-ui/index.html#/")
+        .baseUrl("http://192.168.1.43:1111/")
         .client(client)
         .addConverterFactory(GsonConverterFactory.create())
         .build()
