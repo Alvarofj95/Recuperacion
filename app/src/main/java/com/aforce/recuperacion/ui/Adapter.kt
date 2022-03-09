@@ -27,9 +27,7 @@ class Adapter(private val onProductClicked:(Product) -> Unit) :
         holder.binding.tvPriceItem.text = product.regularPrice.toString()
         holder.binding.ivProductItem.imageUrl(product.imageUrl)
         if (product.stock<= 5) {
-            holder.binding.tvAlertItem.isInvisible
-        } else {
-            holder.binding.tvAlertItem.isVisible
+            holder.binding.tvAlertItem.isVisible = true
         }
 
         holder.binding.root.setOnClickListener{

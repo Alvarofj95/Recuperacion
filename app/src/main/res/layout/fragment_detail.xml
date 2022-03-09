@@ -80,6 +80,7 @@
         android:layout_marginStart="40dp"
         android:layout_marginTop="20dp"
         android:text="@string/Android"
+        android:visibility="invisible"
         android:textAppearance="@style/descuento"
         app:layout_constraintBottom_toBottomOf="@+id/textView8"
         app:layout_constraintStart_toStartOf="@+id/textView8"
@@ -91,6 +92,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:text="@string/Euro"
+        android:visibility="invisible"
         android:textAppearance="@style/descuento"
         app:layout_constraintBottom_toBottomOf="@+id/tv_priceDis_detail"
         app:layout_constraintStart_toEndOf="@+id/tv_priceDis_detail"
@@ -98,11 +100,12 @@
         />
 
     <TextView
-        android:id="@+id/textView7"
+        android:id="@+id/tv_disponible"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="40dp"
         android:text="@string/Disponible"
+        android:visibility="invisible"
         android:textAppearance="@style/titulo"
         app:layout_constraintBottom_toBottomOf="@+id/tv_count_detail"
         app:layout_constraintEnd_toEndOf="parent"

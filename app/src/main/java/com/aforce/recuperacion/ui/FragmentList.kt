@@ -34,6 +34,11 @@ class FragmentList : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.fabAddProduct.visibility = View.GONE
+        binding.progressBar.visibility = View.VISIBLE
+        binding.searchView.visibility = View.VISIBLE
+
+        configUi()
         binding.rvProduct.adapter = adapter
         binding.rvProduct.layoutManager = GridLayoutManager(context, 2)
 
