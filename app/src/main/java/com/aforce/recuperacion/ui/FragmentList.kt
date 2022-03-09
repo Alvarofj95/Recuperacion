@@ -6,15 +6,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.aforce.recuperacion.R
+import com.aforce.recuperacion.databinding.FragmentDetailBinding
 
 class FragmentList : Fragment() {
+
+    private var _binding: FragmentDetailBinding? = null
+    private val binding
+        get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_list, container, false)
+        _binding = FragmentDetailBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
 }
