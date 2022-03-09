@@ -2,9 +2,12 @@ package com.aforce.recuperacion.ui
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.view.isInvisible
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.aforce.recuperacion.Extensions.imageUrl
 import com.aforce.recuperacion.databinding.ItemListBinding
 import com.aforce.recuperacion.model.Product
 
@@ -20,12 +23,18 @@ class Adapter(private val onProductClicked:(Product) -> Unit) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val product = getItem(position)
-        //holder.binding.tvName.text = anime.name
-        //holder.binding.tvCategory.text = anime.category
-        //holder.binding.ivAnime.imageUrl(anime.url)
-        //holder.binding.root.setOnClickListener{
-        //    onAnimeClicked(anime)
-        //}
+        holder.binding.tvNameItem.text = product.name
+        holder.binding.tvPriceItem.text = product.regularPrice.toString()
+        holder.binding.ivProductItem.imageUrl(product.imageUrl)
+        if (product.stock<= 5) {
+            holder.binding.tvAlertItem.isInvisible
+        } else {
+            holder.binding.tvAlertItem.isVisible
+        }
+
+        holder.binding.root.setOnClickListener{
+            onProductClicked(product)
+        }
     }
 
     inner class ViewHolder(val binding: ItemListBinding) :

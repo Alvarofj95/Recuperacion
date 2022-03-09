@@ -5,7 +5,7 @@
         android:enabled="true"
         android:title="Home"/>
     <item
-        android:id="@+id/page_2"
+        android:id="@+id/fragmentListFav"
         android:enabled="true"
         android:title="Fav"/>
 </menu>

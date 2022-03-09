@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_fragmentList_to_fragmentDetail"
             app:destination="@id/fragmentDetail" />
+        <action
+            android:id="@+id/action_fragmentList_to_fragmentAdd"
+            app:destination="@id/fragmentAdd" />
     </fragment>
     <fragment
         android:id="@+id/fragmentDetail"
@@ -23,4 +26,14 @@
             android:name="id"
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/fragmentListFav"
+        android:name="com.aforce.recuperacion.ui.FragmentListFav"
+        android:label="fragment_list_fav"
+        tools:layout="@layout/fragment_list_fav" />
+    <fragment
+        android:id="@+id/fragmentAdd"
+        android:name="com.aforce.recuperacion.ui.FragmentAdd"
+        android:label="fragment_add"
+        tools:layout="@layout/fragment_add" />
 </navigation>
