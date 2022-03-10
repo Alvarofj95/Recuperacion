@@ -9,15 +9,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.aforce.recuperacion.Extensions.imageUrl
 import com.aforce.recuperacion.R
 import com.aforce.recuperacion.databinding.ItemListBinding
+import com.aforce.recuperacion.db.ProductDb
 import com.aforce.recuperacion.model.Product
 
 class AdapterDB(
-    private val onProductClicked:(Product) -> Unit,
-    private val likeNoLike:(Product) -> Boolean
+    private val onProductClicked:(ProductDb) -> Unit,
+    private val likeNoLike:(ProductDb) -> Boolean
 
 ) :
-    ListAdapter<Product, AdapterDB.AdapterDBViewHolder>(ProductDBItemCallBack()) {
-
+   ListAdapter<ProductDb, AdapterDB.AdapterDBViewHolder>(ProductDBItemCallBack()) {
+//ProductDb, AdapterDB.AdapterDBViewHolder
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AdapterDBViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = ItemListBinding.inflate(inflater, parent, false)
@@ -42,7 +43,7 @@ class AdapterDB(
         var likeNoLike = likeNoLike(product)
         //TODO PONER PRECIO CON DESCUENTO
         holder.binding.tvNameItem.text = product.name
-        holder.binding.tvPriceItem.text = product.regularPrice.toString()
+        holder.binding.tvPriceItem.text = product.discountPrice.toString()
         holder.binding.ivProductItem.imageUrl(product.imageUrl)
         if (product.stock<= 5) {
             holder.binding.tvAlertItem.isVisible = true
@@ -66,12 +67,12 @@ class AdapterDB(
 
 }
 
-class ProductDBItemCallBack : DiffUtil.ItemCallback<Product>() {
-    override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean {
+class ProductDBItemCallBack : DiffUtil.ItemCallback<ProductDb>() {
+    override fun areItemsTheSame(oldItem: ProductDb, newItem: ProductDb): Boolean {
         return oldItem.id == newItem.id
     }
 
-    override fun areContentsTheSame(oldItem: Product, newItem: Product): Boolean {
+    override fun areContentsTheSame(oldItem: ProductDb, newItem: ProductDb): Boolean {
         return oldItem.name == newItem.name
     }
 }

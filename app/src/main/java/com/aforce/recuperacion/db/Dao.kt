@@ -1,11 +1,12 @@
 package com.aforce.recuperacion.db
 
+import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
 import com.aforce.recuperacion.model.Product
-
+@Dao
 interface Dao {
     @Query("SELECT * FROM Product")
     fun getAll(): List<ProductDb>

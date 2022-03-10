@@ -6,29 +6,37 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
-import androidx.room.Room
-import com.aforce.recuperacion.R
-import com.aforce.recuperacion.databinding.FragmentDetailBinding
-import com.aforce.recuperacion.db
+import androidx.recyclerview.widget.GridLayoutManager
+import com.aforce.recuperacion.databinding.FragmentListFavBinding
+import com.aforce.recuperacion.db.DatabaseProduct
 import com.aforce.recuperacion.db.ProductDb
 import com.aforce.recuperacion.model.Product
 import java.util.*
 
 class FragmentListFav : Fragment() {
 
-    private var _binding: FragmentDetailBinding? = null
+    private var _binding: FragmentListFavBinding? = null
     private val binding
         get() = _binding!!
-    private var product: MutableList<String> = mutableListOf()
-    private val adapter = AdapterDB({ onProductClick(it.id) }, { onNoLikeClicked(it.id)})
+    private var product: MutableList<ProductDb> = mutableListOf()
+    private val adapter = AdapterDB({ onProductClick(it.idApi) }, { onNoLikeClicked()})
 
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentDetailBinding.inflate(inflater, container, false)
+        _binding = FragmentListFavBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.rvProductFav.adapter = adapter
+        binding.rvProductFav.layoutManager = GridLayoutManager(context, 2)
+
+        requestDataDatabase()
     }
 
 //TODO -> HACER PETICION A LA BBDD PARA QUE DEVUELVA TODO
@@ -40,14 +48,18 @@ class FragmentListFav : Fragment() {
     //    adapter.submitList(db.dao().getAll())
     //}
 
+    private fun requestDataDatabase() {
+        product = DatabaseProduct.getInstance(requireContext()).dao().getAll().toMutableList()
+        adapter.submitList(product)
+    }
 
 
-    private fun onProductClick(id: String) {
-        val action = FragmentListDirections.actionFragmentListToFragmentDetail(id)
+    private fun onProductClick(idApi: String) {
+        val action = FragmentListDirections.actionFragmentListToFragmentDetail(idApi)
         findNavController().navigate(action)
     }
 
-    private fun onNoLikeClicked(id: String): Boolean {
-        return product.contains(id)
+    private fun onNoLikeClicked(): Boolean {
+        return true
     }
 }

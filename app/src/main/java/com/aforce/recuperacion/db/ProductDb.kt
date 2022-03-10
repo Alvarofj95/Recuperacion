@@ -9,7 +9,7 @@ data class ProductDb(
     @ColumnInfo(name = "idApi") val idApi: String,
     @ColumnInfo(name = "name") val name: String,
     @ColumnInfo(name = "stock") val stock: Int,
-    @ColumnInfo(name = "discountPrice") val discountPrice: Number,
+    @ColumnInfo(name = "discountPrice") val discountPrice: Int,
     @ColumnInfo(name = "imageUrl") val imageUrl: String,
     @ColumnInfo(name = "like") var like: Boolean
 

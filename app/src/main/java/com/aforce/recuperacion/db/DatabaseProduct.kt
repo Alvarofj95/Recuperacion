@@ -23,4 +23,5 @@ abstract class DatabaseProduct : RoomDatabase() {
         private fun buildDatabase(context: Context) =
             Room.databaseBuilder(context.applicationContext, DatabaseProduct::class.java, "product.db").allowMainThreadQueries().build()
     }
+
 }
