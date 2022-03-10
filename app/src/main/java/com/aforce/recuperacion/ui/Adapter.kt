@@ -15,6 +15,7 @@ import com.aforce.recuperacion.model.Product
 class Adapter(
     private val onProductClicked:(Product) -> Unit,
     private val likeNoLike:(Product) -> Boolean
+
 ) :
         ListAdapter<Product, Adapter.ViewHolder>(ProductItemCallBack()) {
 
@@ -35,7 +36,6 @@ class Adapter(
         }
 
         holder.binding.ibNoLikeItem.setOnClickListener{
-
             if (likeNoLike == true) {
                 likeNoLike = false
             } else {
@@ -46,6 +46,10 @@ class Adapter(
 
         holder.binding.root.setOnClickListener{
             onProductClicked(product)
+        }
+
+        holder.binding.root.setOnClickListener {
+            onProductListener(product)
         }
     }
 
