@@ -38,7 +38,7 @@ class FragmentDetail : Fragment() {
 
         args.id?.let {
             requestData(it)
-        } ?: showError("AnimeId Null")
+        } ?: showError("ProductId Null")
     }
 
     private fun showError(message: String) {
@@ -78,6 +78,7 @@ class FragmentDetail : Fragment() {
 
             if (it.discountPrice.toInt() < it.regularPrice.toInt()) {
                 binding.tvPriceDisDetail.isVisible = true
+                binding.textView9.isVisible = true
             }
 
             if (it.stock > 0 ) {

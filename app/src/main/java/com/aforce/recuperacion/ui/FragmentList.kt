@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.aforce.recuperacion.databinding.FragmentListBinding
@@ -21,8 +22,8 @@ class FragmentList : Fragment() {
     private var _binding: FragmentListBinding? = null
     private val binding
         get() = _binding!!
-
-    private val adapter = Adapter { onProductClick(it.id) }
+    private var product: MutableList<String> = mutableListOf()
+    private val adapter = Adapter ({ onProductClick(it.id) }, { onNoLikeClicked(it.id)})
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -79,6 +80,11 @@ class FragmentList : Fragment() {
         val action = FragmentListDirections.actionFragmentListToFragmentDetail(id)
         findNavController().navigate(action)
     }
+
+    private fun onNoLikeClicked(id: String): Boolean {
+        return product.contains(id)
+    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

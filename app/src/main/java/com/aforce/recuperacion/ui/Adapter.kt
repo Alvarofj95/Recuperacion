@@ -8,21 +8,25 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.aforce.recuperacion.Extensions.imageUrl
+import com.aforce.recuperacion.R
 import com.aforce.recuperacion.databinding.ItemListBinding
 import com.aforce.recuperacion.model.Product
 
-class Adapter(private val onProductClicked:(Product) -> Unit) :
+class Adapter(
+    private val onProductClicked:(Product) -> Unit,
+    private val likeNoLike:(Product) -> Boolean
+) :
         ListAdapter<Product, Adapter.ViewHolder>(ProductItemCallBack()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = ItemListBinding.inflate(inflater, parent, false)
         return ViewHolder(binding)
-
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val product = getItem(position)
+        var likeNoLike = likeNoLike(product)
         holder.binding.tvNameItem.text = product.name
         holder.binding.tvPriceItem.text = product.regularPrice.toString()
         holder.binding.ivProductItem.imageUrl(product.imageUrl)
@@ -30,8 +34,28 @@ class Adapter(private val onProductClicked:(Product) -> Unit) :
             holder.binding.tvAlertItem.isVisible = true
         }
 
+        holder.binding.ibNoLikeItem.setOnClickListener{
+
+            if (likeNoLike == true) {
+                likeNoLike = false
+            } else {
+                likeNoLike = true
+            }
+            isLike(holder, likeNoLike)
+        }
+
         holder.binding.root.setOnClickListener{
             onProductClicked(product)
+        }
+    }
+
+    private fun isLike(holder: ViewHolder, likeNoLike: (Boolean)){
+        with(holder.binding) {
+            if (likeNoLike) {
+                ibNoLikeItem.setImageResource(R.drawable.ic_baseline_favorite_24)
+            } else {
+                ibNoLikeItem.setImageResource(R.drawable.ic_baseline_favorite_border_35)
+            }
         }
     }
 
