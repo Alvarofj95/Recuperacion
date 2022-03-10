@@ -10,11 +10,11 @@ data class ProductBody(
     @Expose
     val stock: Int,
     @Expose
-    val regularPrice: Number,
+    val regularPrice: Float,
     @Expose
-    val discountPrice: Number,
+    val discountPrice: Float,
     @Expose
-    val available: Boolean,
+    val imageUrl: String,
     @Expose
-    val imageUrl: String
+    val available: Boolean
 )

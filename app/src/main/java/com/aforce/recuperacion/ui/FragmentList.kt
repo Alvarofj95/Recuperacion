@@ -89,6 +89,9 @@ class FragmentList : Fragment() {
         return product.contains(id)
     }
 
+    private fun searchProduct() {
+        
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()

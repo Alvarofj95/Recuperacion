@@ -18,10 +18,10 @@ data class Product(
     val stock: Int,
     @SerializedName("regularPrice")
     @Expose
-    val regularPrice: Number,
+    val regularPrice: Float,
     @SerializedName("discountPrice")
     @Expose
-    val discountPrice: Number,
+    val discountPrice: Float,
     @SerializedName("available")
     @Expose
     val available: Boolean,
