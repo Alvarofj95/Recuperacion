@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.room.Room
 import com.aforce.recuperacion.R
 import com.aforce.recuperacion.databinding.FragmentDetailBinding
 import com.aforce.recuperacion.db
@@ -18,6 +19,9 @@ class FragmentListFav : Fragment() {
     private val binding
         get() = _binding!!
     private val adapter = Adapter(::toggleChecked, ::onTaskClicked)
+    private val room = Room
+        .databaseBuilder( this, ProductDb::class.java, "product")
+        .build
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
