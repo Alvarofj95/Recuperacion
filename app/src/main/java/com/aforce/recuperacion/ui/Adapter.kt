@@ -27,6 +27,7 @@ class Adapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val product = getItem(position)
         var likeNoLike = likeNoLike(product)
+        //TODO PONER PRECIO CON DESCUENTO
         holder.binding.tvNameItem.text = product.name
         holder.binding.tvPriceItem.text = product.regularPrice.toString()
         holder.binding.ivProductItem.imageUrl(product.imageUrl)
