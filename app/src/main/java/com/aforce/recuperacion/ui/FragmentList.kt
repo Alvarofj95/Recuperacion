@@ -42,7 +42,10 @@ class FragmentList : Fragment() {
         configUi()
         binding.rvProduct.adapter = adapter
         binding.rvProduct.layoutManager = GridLayoutManager(context, 2)
-
+        binding.fabAddProduct.setOnClickListener {
+            val action = FragmentListDirections.actionFragmentListToFragmentAdd()
+            findNavController().navigate(action)
+        }
         requestData()
     }
 
@@ -85,6 +88,9 @@ class FragmentList : Fragment() {
         return product.contains(id)
     }
 
+    private fun searchProduct() {
+        
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()
