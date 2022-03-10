@@ -7,14 +7,14 @@ import androidx.room.Update
 import com.aforce.recuperacion.model.Product
 
 interface Dao {
-    @Query("SELECT * FROM ProductDb")
+    @Query("SELECT * FROM Product")
     fun getAll(): List<ProductDb>
 
-    @Query("SELECT * FROM ProductDb WHERE idApi = :productId")
+    @Query("SELECT * FROM Product WHERE Product.idApi = :productId")
     fun findById(productId: Int): ProductDb
 
     @Insert
-    fun insertProduct(List<ProductDb>)
+    fun insertProduct(productDb: ProductDb)
 
     @Update
     fun updateProduct(productDb: ProductDb)

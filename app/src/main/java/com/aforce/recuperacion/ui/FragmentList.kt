@@ -88,7 +88,10 @@ class FragmentList : Fragment() {
     private fun onNoLikeClicked(id: String): Boolean {
         return product.contains(id)
     }
-
+    //TODO -> HACER PETICION A LA BBDD PARA QUE DEVUELVA TODO
+//TODO -> HACER UNA FUNC QUE AL DAR DISLIKE BORRE EL REGISTRO
+//TODO -> FUNCION QUE AL DAR LIKE SE GUARDE EN LA BBDD
+//TODO -> HACER EL SEARCH
     private fun searchProduct() {
         
     }
