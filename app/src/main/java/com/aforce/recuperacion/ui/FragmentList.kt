@@ -143,7 +143,6 @@ class FragmentList : Fragment() {
         } else {
             productLike(productUnit)
         }
-
     }
 
     override fun onDestroyView() {

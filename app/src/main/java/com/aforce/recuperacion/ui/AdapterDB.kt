@@ -15,7 +15,8 @@ import okhttp3.internal.notify
 
 class AdapterDB(
     private val onProductClicked:(ProductDb) -> Unit,
-    private val likeNoLike:(ProductDb) -> Boolean
+    private val likeNoLike:(ProductDb) -> Boolean,
+    private val dislike: (ProductDb) -> Unit
 
 ) :
    ListAdapter<ProductDb, AdapterDB.AdapterDBViewHolder>(ProductDBItemCallBack()) {
@@ -50,7 +51,7 @@ class AdapterDB(
         }
 
         holder.binding.ibNoLikeItem.setOnClickListener{
-
+            dislike(product)
             Log.e("likeNoLike", "$likeNoLike")
             if (likeNoLike == true) {
                 likeNoLike = false

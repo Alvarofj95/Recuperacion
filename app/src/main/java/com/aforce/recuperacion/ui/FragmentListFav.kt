@@ -6,13 +6,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContentProviderCompat
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.aforce.recuperacion.databinding.FragmentListFavBinding
 import com.aforce.recuperacion.db.DatabaseProduct
 import com.aforce.recuperacion.db.ProductDb
-import com.aforce.recuperacion.model.Product
+import okhttp3.internal.notify
 import java.util.*
 
 class FragmentListFav : Fragment() {
@@ -21,7 +20,7 @@ class FragmentListFav : Fragment() {
     private val binding
         get() = _binding!!
     private var product: MutableList<ProductDb> = mutableListOf()
-    private val adapter: AdapterDB = AdapterDB({ onProductClick(it.idApi) }, { onNoLikeClicked()})
+    private val adapter: AdapterDB = AdapterDB({ onProductClick(it.idApi) }, { onNoLikeClicked()}, {productDislike(it)})
 
 
     override fun onCreateView(
@@ -40,6 +39,8 @@ class FragmentListFav : Fragment() {
         Log.e("producto", "$product")
         requestDataDatabase()
 
+
+
     }
 
 //TODO -> HACER PETICION A LA BBDD PARA QUE DEVUELVA TODO
@@ -52,15 +53,24 @@ class FragmentListFav : Fragment() {
     //}
 
     private fun requestDataDatabase() {
+        product.clear()
         product = DatabaseProduct.getInstance(requireContext()).dao().findByFav().toMutableList()
         Log.e("producto", "$product")
         adapter.submitList(product)
+        adapter.notifyDataSetChanged()
+
     }
 
 
     private fun onProductClick(idApi: String) {
         val action = FragmentListDirections.actionFragmentListToFragmentDetail(idApi)
         findNavController().navigate(action)
+    }
+
+    private fun productDislike(productDb: ProductDb){
+        DatabaseProduct.getInstance(requireContext()).dao().deleteProduct(productDb)
+        product.remove(productDb)
+        requestDataDatabase()
     }
 
     private fun onNoLikeClicked(): Boolean {
