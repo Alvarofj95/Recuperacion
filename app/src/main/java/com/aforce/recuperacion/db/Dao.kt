@@ -8,8 +8,11 @@ interface Dao {
     @Query("SELECT * FROM Product")
     fun getAll(): List<ProductDb>
 
-    @Query("SELECT * FROM Product WHERE Product.`like` = 'true' ")
+    @Query("SELECT * FROM Product WHERE Product.like = true ")
     fun findByFav(): List<ProductDb>
+
+    @Query("SELECT * FROM Product WHERE Product.idApi = :productDb ")
+    fun findById(productDb: Int): List<ProductDb>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertProduct(productDb: ProductDb)

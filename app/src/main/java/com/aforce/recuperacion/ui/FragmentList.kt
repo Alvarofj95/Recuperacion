@@ -5,9 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.aforce.recuperacion.databinding.FragmentListBinding
@@ -26,7 +24,7 @@ class FragmentList : Fragment() {
     private val binding
         get() = _binding!!
     private var product: MutableList<Product> = mutableListOf()
-    private val adapter = Adapter ({ onProductClick(it.id) }, { onNoLikeClicked(it)})
+    private val adapter = Adapter ({ onProductClick(it.id) }, { onNoLikeClicked(it)}, {saveDelete(it)})
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -93,17 +91,12 @@ class FragmentList : Fragment() {
     }
 
     private fun onProductClick(id: String) {
+
         val action = FragmentListDirections.actionFragmentListToFragmentDetail(id)
         findNavController().navigate(action)
     }
 
     private fun onNoLikeClicked(productUnit: Product): Boolean {
-        if (product.contains(productUnit)) {
-            productDislike(productUnit)
-        } else {
-            productLike(productUnit)
-        }
-
         return product.contains(productUnit)
     }
     //TODO -> HACER PETICION A LA BBDD PARA QUE DEVUELVA TODO
@@ -122,7 +115,7 @@ class FragmentList : Fragment() {
             productLik.stock,
             productLik.discountPrice,
             productLik.imageUrl,
-            like = true
+            liked = true
         )
 
         DatabaseProduct.getInstance(requireContext()).dao().insertProduct(newProduct)
@@ -137,11 +130,20 @@ class FragmentList : Fragment() {
             productLik.stock,
             productLik.discountPrice,
             productLik.imageUrl,
-            like = true
+            liked = false
         )
 
         DatabaseProduct.getInstance(requireContext()).dao().deleteProduct(newProduct)
         product.remove(productLik)
+    }
+
+    private fun saveDelete(productUnit: Product){
+        if (product.contains(productUnit)) {
+            productDislike(productUnit)
+        } else {
+            productLike(productUnit)
+        }
+
     }
 
     override fun onDestroyView() {

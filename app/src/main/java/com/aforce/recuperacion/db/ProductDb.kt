@@ -12,5 +12,5 @@ data class ProductDb(
     @ColumnInfo(name = "stock") val stock: Int,
     @ColumnInfo(name = "discountPrice") val discountPrice: Float,
     @ColumnInfo(name = "imageUrl") val imageUrl: String,
-    @ColumnInfo(name = "like") var like: Boolean
+    @ColumnInfo(name = "like") var liked: Boolean
 )

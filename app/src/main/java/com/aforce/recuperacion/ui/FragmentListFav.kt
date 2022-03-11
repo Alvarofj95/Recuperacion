@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContentProviderCompat
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.aforce.recuperacion.databinding.FragmentListFavBinding
@@ -20,7 +21,7 @@ class FragmentListFav : Fragment() {
     private val binding
         get() = _binding!!
     private var product: MutableList<ProductDb> = mutableListOf()
-    private val adapter = AdapterDB({ onProductClick(it.idApi) }, { onNoLikeClicked()})
+    private val adapter: AdapterDB = AdapterDB({ onProductClick(it.idApi) }, { onNoLikeClicked()})
 
 
     override fun onCreateView(
@@ -36,8 +37,9 @@ class FragmentListFav : Fragment() {
 
         binding.rvProductFav.adapter = adapter
         binding.rvProductFav.layoutManager = GridLayoutManager(context, 2)
-
+        Log.e("producto", "$product")
         requestDataDatabase()
+
     }
 
 //TODO -> HACER PETICION A LA BBDD PARA QUE DEVUELVA TODO

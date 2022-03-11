@@ -2,6 +2,7 @@ package com.aforce.recuperacion.ui
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.ListAdapter
@@ -10,11 +11,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.aforce.recuperacion.Extensions.imageUrl
 import com.aforce.recuperacion.R
 import com.aforce.recuperacion.databinding.ItemListBinding
+import com.aforce.recuperacion.db.DatabaseProduct
 import com.aforce.recuperacion.model.Product
 
 class Adapter(
     private val onProductClicked:(Product) -> Unit,
-    private val likeNoLike:(Product) -> Boolean
+    private val likeNoLike:(Product) -> Boolean,
+    private val savedDelete:(Product) -> Unit
 
 ) :
         ListAdapter<Product, Adapter.ViewHolder>(ProductItemCallBack()) {
@@ -37,11 +40,10 @@ class Adapter(
         }
 
         holder.binding.ibNoLikeItem.setOnClickListener{
-            if (likeNoLike == true) {
-                likeNoLike = false
-            } else {
-                likeNoLike = true
-            }
+            savedDelete(product)
+
+            likeNoLike = likeNoLike != true
+
             isLike(holder, likeNoLike)
         }
 

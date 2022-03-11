@@ -11,6 +11,7 @@ import com.aforce.recuperacion.Extensions.imageUrl
 import com.aforce.recuperacion.R
 import com.aforce.recuperacion.databinding.ItemListBinding
 import com.aforce.recuperacion.db.ProductDb
+import okhttp3.internal.notify
 
 class AdapterDB(
     private val onProductClicked:(ProductDb) -> Unit,
@@ -62,6 +63,8 @@ class AdapterDB(
         holder.binding.root.setOnClickListener{
             onProductClicked(product)
         }
+
+        holder.binding.ibNoLikeItem.setImageResource(R.drawable.ic_baseline_favorite_24)
     }
 }
 
