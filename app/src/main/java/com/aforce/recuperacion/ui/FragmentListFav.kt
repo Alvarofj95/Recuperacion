@@ -1,6 +1,7 @@
 package com.aforce.recuperacion.ui
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -49,7 +50,8 @@ class FragmentListFav : Fragment() {
     //}
 
     private fun requestDataDatabase() {
-        product = DatabaseProduct.getInstance(requireContext()).dao().getAll().toMutableList()
+        product = DatabaseProduct.getInstance(requireContext()).dao().findByFav().toMutableList()
+        Log.e("producto", "$product")
         adapter.submitList(product)
     }
 

@@ -11,8 +11,11 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.aforce.recuperacion.databinding.FragmentListBinding
+import com.aforce.recuperacion.db.DatabaseProduct
+import com.aforce.recuperacion.db.ProductDb
 import com.aforce.recuperacion.model.Product
 import com.aforce.recuperacion.network.NetworkConfig
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import retrofit2.Call
 import retrofit2.Response
 
@@ -22,8 +25,8 @@ class FragmentList : Fragment() {
     private var _binding: FragmentListBinding? = null
     private val binding
         get() = _binding!!
-    private var product: MutableList<String> = mutableListOf()
-    private val adapter = Adapter ({ onProductClick(it.id) }, { onNoLikeClicked(it.id)})
+    private var product: MutableList<Product> = mutableListOf()
+    private val adapter = Adapter ({ onProductClick(it.id) }, { onNoLikeClicked(it)})
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -59,7 +62,12 @@ class FragmentList : Fragment() {
                     binding.searchView.visibility = View.VISIBLE
                     adapter.submitList(response.body())
                 } else {
-                    Toast.makeText(context, "Error en la respuesta", Toast.LENGTH_SHORT).show()
+                    MaterialAlertDialogBuilder(requireContext())
+                        .setTitle("Ups...")
+                        .setMessage("Error en la respuesta")
+                        .setPositiveButton("OK") { dialog, which ->}
+                        .show()
+
                     val code = response.code()
                     val message = response.message()
                     Log.e("requestData", "error en la respuesta: $code <> $message")
@@ -67,7 +75,11 @@ class FragmentList : Fragment() {
             }
 
             override fun onFailure(call: Call<List<Product>>, t: Throwable) {
-                Toast.makeText(context, "Error en la conexion", Toast.LENGTH_SHORT).show()
+                MaterialAlertDialogBuilder(requireContext())
+                    .setTitle("Ups...")
+                    .setMessage("Error en la conexion")
+                    .setPositiveButton("OK") { dialog, which ->}
+                    .show()
                 Log.e("requestData", "error", t)
             }
         })
@@ -85,8 +97,14 @@ class FragmentList : Fragment() {
         findNavController().navigate(action)
     }
 
-    private fun onNoLikeClicked(id: String): Boolean {
-        return product.contains(id)
+    private fun onNoLikeClicked(productUnit: Product): Boolean {
+        if (product.contains(productUnit)) {
+            productDislike(productUnit)
+        } else {
+            productLike(productUnit)
+        }
+
+        return product.contains(productUnit)
     }
     //TODO -> HACER PETICION A LA BBDD PARA QUE DEVUELVA TODO
 //TODO -> HACER UNA FUNC QUE AL DAR DISLIKE BORRE EL REGISTRO
@@ -94,6 +112,36 @@ class FragmentList : Fragment() {
 //TODO -> HACER EL SEARCH
     private fun searchProduct() {
         
+    }
+
+    private fun productLike(productLik: Product){
+
+        val newProduct = ProductDb(
+            productLik.id,
+            productLik.name,
+            productLik.stock,
+            productLik.discountPrice,
+            productLik.imageUrl,
+            like = true
+        )
+
+        DatabaseProduct.getInstance(requireContext()).dao().insertProduct(newProduct)
+        product.add(productLik)
+    }
+
+    private fun productDislike(productLik: Product){
+
+        val newProduct = ProductDb(
+            productLik.id,
+            productLik.name,
+            productLik.stock,
+            productLik.discountPrice,
+            productLik.imageUrl,
+            like = true
+        )
+
+        DatabaseProduct.getInstance(requireContext()).dao().deleteProduct(newProduct)
+        product.remove(productLik)
     }
 
     override fun onDestroyView() {

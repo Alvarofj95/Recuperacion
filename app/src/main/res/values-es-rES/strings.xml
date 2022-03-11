@@ -13,4 +13,6 @@
     <string name="Confirmar">Confirmar</string>
     <string name="Añadir">AÑADIR PRODUCTO</string>
     <string name="UltimasUni">Ultimas Unidades</string>
+    <string name="Casa">Casa</string>
+    <string name="Favorito">Favorito</string>
 </resources>

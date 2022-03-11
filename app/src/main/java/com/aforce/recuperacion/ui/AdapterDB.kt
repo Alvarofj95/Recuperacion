@@ -1,5 +1,6 @@
 package com.aforce.recuperacion.ui
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isVisible
@@ -10,7 +11,6 @@ import com.aforce.recuperacion.Extensions.imageUrl
 import com.aforce.recuperacion.R
 import com.aforce.recuperacion.databinding.ItemListBinding
 import com.aforce.recuperacion.db.ProductDb
-import com.aforce.recuperacion.model.Product
 
 class AdapterDB(
     private val onProductClicked:(ProductDb) -> Unit,
@@ -18,7 +18,6 @@ class AdapterDB(
 
 ) :
    ListAdapter<ProductDb, AdapterDB.AdapterDBViewHolder>(ProductDBItemCallBack()) {
-//ProductDb, AdapterDB.AdapterDBViewHolder
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AdapterDBViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = ItemListBinding.inflate(inflater, parent, false)
@@ -50,6 +49,8 @@ class AdapterDB(
         }
 
         holder.binding.ibNoLikeItem.setOnClickListener{
+
+            Log.e("likeNoLike", "$likeNoLike")
             if (likeNoLike == true) {
                 likeNoLike = false
             } else {
@@ -61,15 +62,12 @@ class AdapterDB(
         holder.binding.root.setOnClickListener{
             onProductClicked(product)
         }
-
-
     }
-
 }
 
 class ProductDBItemCallBack : DiffUtil.ItemCallback<ProductDb>() {
     override fun areItemsTheSame(oldItem: ProductDb, newItem: ProductDb): Boolean {
-        return oldItem.id == newItem.id
+        return oldItem.idApi == newItem.idApi
     }
 
     override fun areContentsTheSame(oldItem: ProductDb, newItem: ProductDb): Boolean {

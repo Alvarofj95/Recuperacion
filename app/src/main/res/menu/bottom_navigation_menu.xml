@@ -3,9 +3,11 @@
     <item
         android:id="@+id/fragmentList"
         android:enabled="true"
-        android:title="Home"/>
+        android:icon="@drawable/ic_baseline_home_24"
+        android:title="@string/Casa" />
     <item
         android:id="@+id/fragmentListFav"
         android:enabled="true"
-        android:title="Fav"/>
+        android:icon="@drawable/ic_baseline_star_24"
+        android:title="@string/Favorito" />
 </menu>
